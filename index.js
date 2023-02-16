@@ -3,22 +3,36 @@ const cssCode = document.querySelector(".css-editor");
 const jsCode = document.querySelector(".js-editor");
 const output = document.querySelector("#output");
 
-let html = "", css = "", js = "";
+function runCode() {
+    output.contentDocument.body.innerHTML = htmlCode.value + "<style>" + cssCode.value + "</style>";
+    output.contentWindow.eval(jsCode.value);
+}
+
 htmlCode.oninput = function () {
-    html = this.value;
+    save();
+    runCode();
 }
 
 cssCode.oninput = function () {
-    css = this.value;
+    save();
+    runCode();
 }
 
 jsCode.oninput = function () {
-    js = this.value;
+    save();
+    runCode();
 }
 
 document.querySelector(".run-button").addEventListener("click", function () {
-    output.contentDocument.body.innerHTML = html + "<style>" + css + "</style>";
-    output.contentWindow.eval(js);
+    runCode();
+})
+
+document.querySelector(".clear-button").addEventListener("click", function () {
+    htmlCode.value = "";
+    cssCode.value = "";
+    jsCode.value = "";
+    output.contentDocument.body.innerHTML = "";
+    localStorage.clear();
 })
 
 // responsive
@@ -81,3 +95,24 @@ btnResult.addEventListener("click", function () {
     document.querySelector(".container").style.display = "none";
     output.style.height = "100vh";
 })
+
+function save() {
+    const obj = {
+        htmlKey: htmlCode.value,
+        cssKey: cssCode.value,
+        jsKey: jsCode.value
+    }
+    localStorage.setItem("code", JSON.stringify(obj));
+}
+
+function fetch() {
+    let code = JSON.parse(localStorage.getItem("code"));
+    if (code !== null) {
+        htmlCode.value = code["htmlKey"];
+        cssCode.value = code["cssKey"];
+        jsCode.value = code["jsKey"];
+    }
+}
+
+fetch();
+runCode();
