@@ -56,26 +56,29 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: auto;
-  height: 60px;
+  margin-left: 8px;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 button {
   margin-right: 15px;
-  padding: 9px 32px 9px 32px;
-  border-radius: 6px;
+  padding: 12px 25px;
+  border-radius: 5px;
   border: none;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 15px;
   background-color: #353846;
   color: white;
   font-weight: lighter;
   transition: all 0.1ms;
 }
 
-button:hover {
-  background-color: #42e9b2;
-  color: black;
+@media (hover: hover) {
+  button:hover {
+    background-color: #42e9b2;
+    color: black;
+  }
 }
 
 h3 {
