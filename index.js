@@ -94,6 +94,10 @@ const btnResult = document.querySelector(".btn-result");
 btnResult.addEventListener("click", function () {
     document.querySelector(".container").style.display = "none";
     output.style.height = "100vh";
+    btnHTML.style.backgroundColor = "";
+    btnCSS.style.backgroundColor = "";
+    btnJS.style.backgroundColor = "";
+    btnJS.style.color = "";
 })
 
 function save() {
